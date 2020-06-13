@@ -27,7 +27,7 @@ router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', async (req, res) => {
   res.send("<h3>Api Running...</h3>")
-}
+});
 
 router.post('/message/text/send', async (req, res) => {
   let { text, email, sessionId } = req.body
