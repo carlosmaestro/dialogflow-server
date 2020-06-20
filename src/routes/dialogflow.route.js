@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
-const multer  = require('multer')
+const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const util = require('util');
 const fs = require('fs');
@@ -59,12 +59,18 @@ router.post('/message/text/send', async (req, res) => {
       ]
     }
   };
+  var response = null;
+  try {
+    response = await sessionClient.detectIntent(request);
 
-  const responses = await sessionClient.detectIntent(request);
-
-  console.log("Response....: " + JSON.stringify(responses));
-  console.log("############################");
-  res.send(responses)
+    console.log(response);
+    console.log("Response....: " + JSON.stringify(response));
+    console.log("############################");
+  } catch (error) {
+    response = error
+    console.log(console.error())
+  }
+  res.send(response)
 })
 
 router.post('/message/audio/send', upload.single('audioFile'), async (req, res) => {

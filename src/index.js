@@ -3,6 +3,9 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const app = express()
 
+const dotenv = require('dotenv')
+if (dotenv) dotenv.config()
+
 const routes = require("./routes/dialogflow.route");
 
 app.use(bodyParser.urlencoded({ extended: true }))
